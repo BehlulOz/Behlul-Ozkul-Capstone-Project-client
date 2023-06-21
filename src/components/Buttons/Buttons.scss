@@ -1,0 +1,29 @@
+.buttons {
+  height: 5rem;
+  
+}
+.button {
+  font-family: "WorkSans";
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem 1.5rem;
+  margin: 2rem;
+  border:none;
+  border-radius: 2rem;
+  &:hover {
+    cursor: pointer;
+  }
+  
+  &__check {
+    background-color: #A1B57D;
+    color: aliceblue;
+  }
+  &__reset {
+    background-color: #B33030;
+    color: aliceblue;
+  }
+  &__solve {
+    background-color: #19282F;
+    color: aliceblue;
+  }
+}

@@ -1,0 +1,15 @@
+@use "./styles/partials/fonts" as *;
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 150vh;
+  padding-top: 2%;
+  background-color: #1A5F7A;
+}
+
+
+
+
+

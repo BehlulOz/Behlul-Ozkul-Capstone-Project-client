@@ -1,0 +1,61 @@
+.board {
+  display: flex;
+  font-family: "WorkSans";
+  font-weight: bold;
+  font-size: 3rem;
+}
+.node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: #E96479;
+  height: 3rem;
+  width: 3rem;
+  &-empty {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    background-color:#F2FFE9;
+    height: 3rem;
+    width: 3rem;
+  }
+  &-input {
+    margin: 0;
+    font-family: "WorkSans";
+    font-weight: bold;
+   
+    padding: 10px;
+    background-color:#F2FFE9;
+    height: 2rem;
+    width: 2rem;
+    font-size: 3rem;
+    padding: 1rem;
+    cursor: pointer;
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+    
+  }
+}
+
+.input-error {
+  animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  from {
+    background-color: red;
+  }
+  to {
+    background-color: initial;
+  }
+}
