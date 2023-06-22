@@ -32,7 +32,6 @@
     margin: 0;
     font-family: "WorkSans";
     font-weight: bold;
-   
     padding: 10px;
     background-color:#F2FFE9;
     height: 2rem;
@@ -48,14 +47,44 @@
 }
 
 .input-error {
-  animation: blink 1s infinite alternate;
+  animation: blink-red 2s linear forwards;
+  text-decoration: underline red;
 }
 
-@keyframes blink {
-  from {
+@keyframes blink-red {
+  0% {
     background-color: red;
   }
-  to {
-    background-color: initial;
+  50% {
+    background-color: #F2FFE9;
   }
+  75% {
+    background-color: red;
+  }
+  100% {
+    background-color: #F2FFE9;
+    
+  }
+  
+}
+
+.input-true {
+  animation: blink-green 2s linear forwards;
+}
+
+@keyframes blink-green {
+  0% {
+    background-color: green;
+  }
+  50% {
+    background-color: #F2FFE9;
+  }
+  75% {
+    background-color: green;
+  }
+  100% {
+    background-color: #F2FFE9;
+    
+  }
+  
 }

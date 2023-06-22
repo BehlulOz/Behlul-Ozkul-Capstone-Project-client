@@ -4,9 +4,8 @@ import initialGrid from "../../data/sudoku-boards.json";
 import Buttons from "../Buttons/Buttons";
 
 export const SudokuBoard = () => {
-  const grid = JSON.parse(JSON.stringify(initialGrid));
-  // const [originalGrid] = [...initialGrid];
-  const [newGrid, setNewGrid] = useState([...initialGrid]);
+  let grid = JSON.parse(JSON.stringify(initialGrid));
+  const [newGrid, setNewGrid] = useState([...grid]);
   const [inputCheck, setInputCheck] = useState(true);
   const rowCheck = useRef(true);
   const colCheck = useRef(true);
@@ -14,43 +13,37 @@ export const SudokuBoard = () => {
   const completeCheck = useRef(false);
 
   const changeHandler = (e, rowIndex, colIndex) => {
-    const tempGrid = [...newGrid];
     const newInput = parseInt(e.target.value);
     rowCheck.current = true;
     colCheck.current = true;
     innerGridCheck.current = true;
 
     for (let i = 0; i < 9; i++) {
-      if (newInput === tempGrid[i][rowIndex]) {
+      if (newInput === newGrid[i][rowIndex]) {
         rowCheck.current = false;
         console.log("Duplicate row value found:", newInput);
       }
-      if (newInput === tempGrid[colIndex][i]) {
+      if (newInput === newGrid[colIndex][i]) {
         colCheck.current = false;
         console.log("Duplicate column value found:", newInput);
       }
     }
 
     checkInnerGrid(rowIndex, colIndex, newInput);
-    console.log(
-      "colCheck.current",
-      colCheck.current,
-      "rowCheck.current",
-      rowCheck.current
-    );
+
     if (
-      0 < newInput &&
+      (0 < newInput &&
       newInput <= 9 &&
       colCheck.current &&
       rowCheck.current &&
-      innerGridCheck.current
+      
+      innerGridCheck.current) 
     ) {
-      tempGrid[colIndex][rowIndex] = newInput;
+      newGrid[colIndex][rowIndex] = newInput;
       e.target.classList.remove("input-error");
-      console.log(tempGrid[colIndex][rowIndex]);
     } else {
-      tempGrid[colIndex][rowIndex] = -1;
       e.target.classList.add("input-error");
+      e.target.value = "";
     }
     setInputCheck(
       !rowCheck.current || !colCheck.current || !innerGridCheck.current
@@ -58,131 +51,9 @@ export const SudokuBoard = () => {
     if (checkComplete()) {
       alert("Congratulations! You Completed the SUDOKU.");
     }
-    console.log("tempGrid:", tempGrid);
-    setNewGrid([...tempGrid]);
-  };
-
-  // const sudokuCheck = (rowIndex, colIndex) => {
-  //   const set = new Set();
-  //   for (let i = 0; i < 9; i++) {
-  //     const rowArray = rowArray.push(newGrid[i][rowIndex]);
-  //     console.log(rowArray);
-  //   }
-  //   rowArray.filter()
-  //     if (duplicatecheck === newGrid[i][rowIndex]) {
-  //       rowCheck.current = false;
-  //       console.log("Duplicate row value found:", duplicatecheck);
-  //     }
-  //     if (duplicatecheck === newGrid[colIndex][i]) {
-  //       colCheck.current = false;
-  //       console.log("Duplicate column value found:", duplicatecheck);
-  //     }
-  // }
-  const sudokuCheck = (rowIndex, colIndex) => {
-    if (colCheck.current && rowCheck.current && innerGridCheck.current) {
-      alert("Yes! You are On The Right Track");
-      return true;
-    } else {
-      alert("Please, Check the Numbers Again!");
-    }
-  };
-
-  const solveCheck = (rowIndex, colIndex) => {
-    if (colCheck.current && rowCheck.current && innerGridCheck.current) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const sudokuReset = () => {
-    const updatedGrid = JSON.parse(JSON.stringify(initialGrid));
-    setNewGrid([...updatedGrid]);
-  };
-
-  // const sudokuSolver = () => {
-  //   for (let i = 0; i < 9; i++) {
-  //     for (let j = 0; j < 9; j++) {
-  //       for (let k = 1; k <= 9; k++) {
-  //         if (newGrid[i][j] < 0) {
-  //           newGrid[i][j] = k;
-  //         } else {
-  //           break;
-  //         }
-  //       }
-  //     }
-  //   }
-  // };
-
-  const sudokuSolver = () => {
-    solveSudoku(0, 0);
-  };
-
-  const solveSudoku = (row, col) => {
-    if (col === 9) {
-      // Move to the next rowIndex if the end of the current rowIndex is reached
-      row++;
-      col = 0;
-    }
-
-    // Base case: If all cells have been filled, the puzzle is solved
-    if (row === 9) {
-      alert("Sudoku solved!");
-      return true;
-    }
-
-    // Skip already filled cells
-    if (newGrid[col][row] > 0) {
-      return solveSudoku(row, col + 1);
-    }
-
-    // Try different values for the empty cell
-    for (let num = 1; num <= 9; num++) {
-      if (isValidMove(row, col, num)) {
-        // Assign the valid value to the cell
-        newGrid[col][row] = num;
-
-        // Recursive call to solve the puzzle
-        if (solveSudoku(row, col + 1)) {
-          return true;
-        }
-
-        // If the current value doesn't lead to a solution, backtrack
-        newGrid[col][row] = 0;
-      }
-    }
-
-    // No valid value found, backtrack to the previous cell
-    return false;
-  };
-
-  const isValidMove = (row, col, num) => {
-    // Check if the value already exists in the same row
-    for (let i = 0; i < 9; i++) {
-      if (newGrid[i][row] === num) {
-        return false;
-      }
-    }
-
-    // Check if the value already exists in the same column
-    for (let i = 0; i < 9; i++) {
-      if (newGrid[col][i] === num) {
-        return false;
-      }
-    }
-
-    // Check if the value already exists in the 3x3 sub-grid
-    const subGridStartRow = Math.floor(row / 3) * 3;
-    const subGridStartCol = Math.floor(col / 3) * 3;
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (newGrid[subGridStartCol + i][subGridStartRow + j] === num) {
-          return false;
-        }
-      }
-    }
-
-    return true;
+    // grid = JSON.parse(JSON.stringify(initialGrid));
+    // console.log("newGrid:", newGrid);
+    setNewGrid([...newGrid]);
   };
 
   const checkInnerGrid = (rowIndex, colIndex, newInput) => {
@@ -203,7 +74,13 @@ export const SudokuBoard = () => {
     }
   };
 
-  const checkComplete = () => {
+  const sudokuReset = () => {
+    const updatedGrid = JSON.parse(JSON.stringify(grid));
+    setNewGrid([...grid]);
+    console.log(updatedGrid);
+  };
+
+    const checkComplete = () => {
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
         if (newGrid[i][j] < 0) {
@@ -214,16 +91,96 @@ export const SudokuBoard = () => {
     return (completeCheck.current = true);
   };
 
+  const sudokuSolver = () => {
+    // solveSudoku(0, 0);
+  };
+
+  // const solveSudoku = (row, col) => {
+  //   if (col === 9) {
+  //     // Move to the next rowIndex if the end of the current rowIndex is reached
+  //     row++;
+  //     col = 0;
+  //   }
+
+  //   // Base case: If all cells have been filled, the puzzle is solved
+  //   if (row === 9) {
+  //     alert("Sudoku solved!");
+  //     return true;
+  //   }
+
+  //   // Skip already filled cells
+  //   if (newGrid[col][row] > 0) {
+  //     return solveSudoku(row, col + 1);
+  //   }
+
+  //   // Try different values for the empty cell
+  //   for (let num = 1; num <= 9; num++) {
+  //     if (isValidMove(row, col, num)) {
+  //       // Assign the valid value to the cell
+  //       newGrid[col][row] = num;
+
+  //       // Recursive call to solve the puzzle
+  //       if (solveSudoku(row, col + 1)) {
+  //         return true;
+  //       }
+
+  //       // If the current value doesn't lead to a solution, backtrack
+  //       newGrid[col][row] = 0;
+  //     }
+  //   }
+
+  //   // No valid value found, backtrack to the previous cell
+  //   return false;
+  // };
+
+  const isValidMove = (row, col, num) => {
+    // Check if the value already exists in the same row
+    for (let i = 0; i < 9; i++) {
+      if (newGrid[i][row] === num) {
+        return false;
+      }
+    }
+
+    // Check if the value already exists in the same column
+    for (let i = 0; i < 9; i++) {
+      if (newGrid[col][i] === num) {
+        return false;
+      }
+    }
+
+    // Check if the value already exists in the 3x3 sub-grid
+    const subGridStartRow = Math.floor(row % 3) * 3;
+    const subGridStartCol = Math.floor(col % 3) * 3;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (newGrid[subGridStartCol + i][subGridStartRow + j] === num) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  };
+
+  const newSudoku = () => {
+    for (let sudokuNum = 1; sudokuNum <= 9; sudokuNum++) {
+      setNewGrid(initialGrid);
+    }
+  };
+
   return (
     <>
       <div className="board" key={JSON.stringify(newGrid)}>
         {newGrid.map((col, colIndex) => (
           <div key={colIndex} className="col">
             {col.map((node, rowIndex) => (
-              <div key={rowIndex} className={node > 0 ? "node" : "node-empty"}>
-                {console.log(initialGrid[colIndex][rowIndex])}
-                {console.log(node)}
-                {initialGrid[colIndex][rowIndex] > 0 ? (
+              <div
+                key={rowIndex}
+                className={
+                  initialGrid[colIndex][rowIndex] > 0 ? "node" : "node-empty"
+                }
+              >
+                {node > 0 ? (
                   node
                 ) : (
                   <input
@@ -248,9 +205,34 @@ export const SudokuBoard = () => {
       <Buttons
         sudokuSolver={sudokuSolver}
         sudokuReset={sudokuReset}
-        sudokuCheck={sudokuCheck}
         setNewGrid={setNewGrid}
       />
     </>
   );
 };
+
+// const sudokuCheck = (rowIndex, colIndex) => {
+//   const set = new Set();
+//   for (let i = 0; i < 9; i++) {
+//     const rowArray = rowArray.push(newGrid[i][rowIndex]);
+//     console.log(rowArray);
+//   }
+//   rowArray.filter()
+//     if (duplicatecheck === newGrid[i][rowIndex]) {
+//       rowCheck.current = false;
+//       console.log("Duplicate row value found:", duplicatecheck);
+//     }
+//     if (duplicatecheck === newGrid[colIndex][i]) {
+//       colCheck.current = false;
+//       console.log("Duplicate column value found:", duplicatecheck);
+//     }
+// }
+
+// const sudokuCheck = (rowIndex, colIndex) => {
+//   if (colCheck.current && rowCheck.current && innerGridCheck.current) {
+//     alert("Yes! You are On The Right Track");
+//     return true;
+//   } else {
+//     alert("Please, Check the Numbers Again!");
+//   }
+// };

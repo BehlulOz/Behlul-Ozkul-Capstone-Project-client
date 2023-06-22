@@ -5,15 +5,15 @@ import initialGrid from "../../data/sudoku-boards.json";
 const Buttons = ({
   sudokuSolver,
   sudokuReset,
-  sudokuCheck,
+  newSudoku,
   setNewGrid
 }) => {
-  const handleCheck = () => {
-    sudokuCheck();
+  const handleNewSudoku = () => {
+    newSudoku();
   };
 
-  const handleReset = (e) => {
-    sudokuReset(e);
+  const handleReset = () => {
+    sudokuReset();
   };
 
   const handleSolve = () => {
@@ -22,8 +22,8 @@ const Buttons = ({
 
   return (
     <div className="buttons">
-      <button className="button button__check" onClick={handleCheck}>
-        Check
+      <button className="button button__check" onClick={handleNewSudoku}>
+        New Sudoku
       </button>
       <button className="button button__reset" onClick={handleReset}>
         Reset
