@@ -41,8 +41,11 @@ export const SudokuBoard = () => {
     ) {
       newGrid[colIndex][rowIndex] = newInput;
       e.target.classList.remove("input-error");
+      e.target.classList.add("input-correct"); 
+      console.log(newGrid);
     } else {
       e.target.classList.add("input-error");
+      e.target.classList.remove("input-correct");
       e.target.value = "";
     }
     setInputCheck(
@@ -170,8 +173,8 @@ export const SudokuBoard = () => {
 
   return (
     <>
-      <div className="board" key={JSON.stringify(newGrid)}>
-        {newGrid.map((col, colIndex) => (
+      <div className="board" key={JSON.stringify(initialGrid)}>
+        {initialGrid.map((col, colIndex) => (
           <div key={colIndex} className="col">
             {col.map((node, rowIndex) => (
               <div
