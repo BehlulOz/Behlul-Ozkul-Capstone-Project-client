@@ -1,0 +1,91 @@
+.board {
+  display: flex;
+  justify-content: center;
+  font-family: "WorkSans";
+  font-weight: bold;
+  font-size: 3rem;
+}
+.node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #A1B57D;
+  color: #F45050;
+  height: 2rem;
+  width: 2rem;
+  padding: 1rem;
+  
+  &-empty {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#F2FFE9;
+    height: 2rem;
+    width: 2rem;
+    padding: 1rem;
+    border: none;
+  }
+  &-input {
+    display: flex;
+    border: none;
+    justify-content: center;
+    margin: 0;
+    font-family: "WorkSans";
+    font-weight: bold;
+    background-color:#F2FFE9;
+    height: 2rem;
+    width: 2rem;
+    font-size: 3rem;
+    padding: 1rem 0.7rem 1rem 1.3rem;
+    color: #393E46;
+    cursor: pointer;
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+    
+  }
+}
+
+.input-error {
+  animation: blink-red 2s linear forwards;
+  text-decoration: underline red;
+}
+
+@keyframes blink-red {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: #F2FFE9;
+  }
+  75% {
+    background-color: red;
+  }
+  100% {
+    background-color: #F2FFE9;
+    
+  }
+  
+}
+
+.input-correct {
+  animation: blink-green 2s linear forwards;
+}
+
+@keyframes blink-green {
+  0% {
+    background-color: green;
+  }
+  50% {
+    background-color: #F2FFE9;
+  }
+  75% {
+    background-color: green;
+  }
+  100% {
+    background-color: #F2FFE9;
+    
+  }
+  
+}
