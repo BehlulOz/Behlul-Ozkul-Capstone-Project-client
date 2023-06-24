@@ -1,20 +1,30 @@
 
+.algo-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 20rem;
+  height: 10rem;
+  margin: 1rem;
+}
+
 .button {
   font-family: "WorkSans";
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  padding: 1rem 1.5rem;
-  margin: 1rem;
+  padding: .5rem 1rem;
+  margin: .5rem;
   border:none;
-  border-radius: 2rem;
-  height: 4rem;
+  border-radius: 3rem;
+  height: 3rem;
   &:hover {
     cursor: pointer;
   }
   &__algo {
     background-color: #F9D949;
     color: #F45050;
-    width: 30rem;
+    width: 20rem;
+    height: 4rem;
     &:hover {
       background-color: #F45050;
       color: #F9D949;
@@ -31,10 +41,3 @@
   }
 }
 
-.algo-button-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 40rem;
-  height: 10rem;
-}

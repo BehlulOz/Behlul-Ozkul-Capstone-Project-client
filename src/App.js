@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import { SudokuBoard } from "./pages/SudokuBoard/SudokuBoard";
@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import BackAlgoPage from "./pages/BackAlgoPage/BackAlgoPage";
 
 function App() {
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -20,5 +21,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;

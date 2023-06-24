@@ -33,7 +33,7 @@ const Buttons = ({ sudokuSolver, sudokuReset, newSudoku, startPlay }) => {
       <button className="button button__solve" onClick={handleSolve}>
         Solve
       </button>
-      <button className="button button__back-algo" onClick={handleSolve}>
+      <button className="button button__back-algo">
         <Link to="/BackAlgo"
         >Learn Backtracking Algorithm!
         </Link>

@@ -1,28 +1,28 @@
 
 .buttons {
-  height: 12rem;
-  width: 60rem;
+  height: 10rem;
+  width: 40rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
+  margin-top: 2rem;
 }
 .button {
   font-family: "WorkSans";
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
-  padding: 1rem 1.5rem;
   margin: 1rem;
   border:none;
-  border-radius: 2rem;
-  height: 4rem;
+  border-radius: 1.5rem;
+  height: 1rem;
+  height: 1rem;
   &:hover {
     cursor: pointer;
   }
   &__play {
     background-color: #F9D949;
     color: #F45050;
-    width: 10rem;
+    
     &:hover {
       background-color: #F45050;
       color: #F9D949;
@@ -39,7 +39,7 @@
   &__reset {
     background-color: #B33030;
     color: aliceblue;
-    width: 10rem;
+    width: 5rem;
     &:hover {
       background-color: #F45050;
       color: #F9D949;
@@ -48,7 +48,7 @@
   &__solve {
     background-color: #19282F;
     color: aliceblue;
-    width: 10rem;
+    
     &:hover {
       background-color: #F45050;
       color: #F9D949;
@@ -57,7 +57,7 @@
   &__back-algo {
     background-color: #497174;
     color: #EB6440;
-    width: 40rem;
+    
     &:hover {
       background-color: #F45050;
       color: #F9D949;

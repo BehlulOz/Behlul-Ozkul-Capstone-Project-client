@@ -14,12 +14,8 @@
   height: 2rem;
   width: 2rem;
   padding: 1rem;
-  
   &-empty {
     margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color:#F2FFE9;
     height: 2rem;
     width: 2rem;
@@ -27,17 +23,15 @@
     border: none;
   }
   &-input {
-    display: flex;
     border: none;
-    justify-content: center;
     margin: 0;
     font-family: "WorkSans";
     font-weight: bold;
     background-color:#F2FFE9;
-    height: 2rem;
-    width: 2rem;
+    height: 2.4rem;
+    width: 2.4rem;
     font-size: 3rem;
-    padding: 1rem 0.7rem 1rem 1.3rem;
+    padding: 0.3rem 0.2rem 0.3rem 0.4rem;
     color: #393E46;
     cursor: pointer;
     &::-webkit-inner-spin-button {
@@ -71,6 +65,8 @@
 
 .input-correct {
   animation: blink-green 2s linear forwards;
+  height: 3rem;
+  width: 3rem;
 }
 
 @keyframes blink-green {

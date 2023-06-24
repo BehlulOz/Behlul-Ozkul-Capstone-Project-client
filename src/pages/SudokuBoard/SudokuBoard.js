@@ -23,14 +23,14 @@ export const SudokuBoard = () => {
     checkComplete();
   }, [newGrid]);
 
-  useEffect ((newInput, rowIndex, colIndex) => {
+  // useEffect ((newInput, rowIndex, colIndex) => {
   
-    if (newInput === NaN) {
-      newGrid[colIndex][rowIndex] = 0;
-      console.log("zero:", newInput);
-      console.log("grid:", newGrid);
-    }
-  },[newGrid])
+  //   if (newInput === NaN) {
+  //     newGrid[colIndex][rowIndex] = 0;
+  //     console.log("zero:", newInput);
+  //     console.log("grid:", newGrid);
+  //   }
+  // },[newGrid])
 
   const changeHandler = (e, rowIndex, colIndex) => {
     const newInput = parseInt(e.target.value);
@@ -99,12 +99,12 @@ export const SudokuBoard = () => {
     const inputNodes = document.querySelectorAll(".node-input");
     inputNodes.forEach((node) => {
       node.value = "";
+      if (sudokuArray[s] === solutionArray[s]) {
+        sudokuArray[s] = [...grid];
+      }
       setNewGrid([...grid]);
       setIsGameReady(false);
     });
-    if (sudokuArray[s] === solutionGrid) {
-      sudokuArray[s] = grid;
-    }
   };
 
   const checkComplete = () => {
@@ -119,14 +119,10 @@ export const SudokuBoard = () => {
   };
 
   const sudokuSolver = () => {
-    sudokuArray[s] = solutionGrid;
+    sudokuArray[s] = solutionArray[s];
     setNewGrid(solutionGrid);
     setIsGameReady(false);
     checkComplete();
-    if (completeCheck.current) {
-      alert("Congratulations! You Completed the SUDOKU.");
-    }
-    console.log(newGrid);
   };
 
   const newSudoku = () => {

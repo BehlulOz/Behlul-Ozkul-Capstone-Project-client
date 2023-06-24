@@ -1,15 +1,16 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
 import "./BackAlgoPage.scss";
-import sudokuArray from "../../data/sudoku-boards.json";
+import algoArray from "../../data/sudoku-boards.json";
 import solutionArray from "../../data/sudoku-solution.json";
 import AlgoButton from "../../components/AlgoButton/AlgoButton";
 
 const BackAlgoPage = () => {
   let [s, setS] = useState(0);
-  let grid = JSON.parse(JSON.stringify(sudokuArray[s]));
+  let grid = JSON.parse(JSON.stringify(algoArray[s]));
   let solutionGrid = JSON.parse(JSON.stringify(solutionArray[s]));
   const [newGrid, setNewGrid] = useState([...grid]);
+  const [isGameReady, setIsGameReady] = useState(false);
   const rowCheck = useRef(true);
   const colCheck = useRef(true);
   const innerGridCheck = useRef(true);
@@ -19,6 +20,7 @@ const BackAlgoPage = () => {
   }, [s]);
 
   const solveSudoku = (colIndex, rowIndex, e) => {
+    setIsGameReady(true);
     if (colIndex === 9) {
       // Move to the next rowIndex if the end of the current rowIndex is reached
       rowIndex++;
@@ -86,50 +88,37 @@ const BackAlgoPage = () => {
   //   return true;
   // };
 
-  const isValidMove = (colIndex, rowIndex, e) => {
-    const newInput = parseInt(e.target.value);
+  const isValidMove = (colIndex, rowIndex, num) => {
     rowCheck.current = true;
     colCheck.current = true;
     innerGridCheck.current = true;
-    console.log("e:", e);
 
     for (let i = 0; i < 9; i++) {
-      if (newInput === newGrid[i][rowIndex]) {
+      if (num === newGrid[i][rowIndex]) {
         rowCheck.current = false;
-        console.log("Duplicate row value found:", newInput);
+        console.log("Duplicate row value found:", num);
       }
-      if (newInput === newGrid[colIndex][i]) {
+      if (num === newGrid[colIndex][i]) {
         colCheck.current = false;
-        console.log("Duplicate column value found:", newInput);
+        console.log("Duplicate column value found:", num);
       }
     }
-    checkInnerGrid(rowIndex, colIndex, newInput);
+    checkInnerGrid(rowIndex, colIndex, num);
 
     if (
-      0 < newInput &&
-      newInput <= 9 &&
+      0 < num &&
+      num <= 9 &&
       colCheck.current &&
       rowCheck.current &&
       innerGridCheck.current
     ) {
-      newGrid[colIndex][rowIndex] = newInput;
-      e.target.classList.add("input-correct");
-      console.log(newGrid);
+      return true;
     } else {
-      e.target.classList.add("input-error");
-      e.target.classList.remove("input-correct");
-      e.target.value = "";
-      newGrid[colIndex][rowIndex] = 0;
-      setTimeout(() => {
-        e.target.classList.remove("input-error");
-      }, 1000);
-      console.log("false:", newInput);
+      return false;
     }
-
-    setNewGrid([...newGrid]);
   };
 
-  const checkInnerGrid = (rowIndex, colIndex, newInput) => {
+  const checkInnerGrid = (rowIndex, colIndex, num) => {
     for (
       let i = colIndex - (colIndex % 3);
       i < colIndex + (3 - (colIndex % 3));
@@ -140,7 +129,7 @@ const BackAlgoPage = () => {
         j < rowIndex + (3 - (rowIndex % 3));
         j++
       ) {
-        if (newInput === newGrid[i][j]) {
+        if (num === newGrid[i][j]) {
           console.log("inner grid duplicate found:", newGrid[i][j]);
           return (innerGridCheck.current = false);
         }
@@ -154,8 +143,8 @@ const BackAlgoPage = () => {
       node.value = "";
       setNewGrid([...grid]);
     });
-    if (sudokuArray[s] === solutionGrid) {
-      sudokuArray[s] = grid;
+    if (algoArray[s] === solutionGrid) {
+      algoArray[s] = grid;
     }
   };
 
@@ -181,17 +170,14 @@ const BackAlgoPage = () => {
 
   return (
     <div className="back-algo-page">
-      <div
-        className="back-algo-page__board"
-        key={JSON.stringify(sudokuArray[s])}
-      >
-        {sudokuArray[s].map((col, colIndex) => (
+      <div className="back-algo-page__board" key={JSON.stringify(algoArray[s])}>
+        {algoArray[s].map((col, colIndex) => (
           <div key={colIndex} className="col">
             {col.map((node, rowIndex) => (
               <div
                 key={rowIndex}
                 className={
-                  sudokuArray[s][colIndex][rowIndex] > 0 ? "node" : "node-empty"
+                  algoArray[s][colIndex][rowIndex] > 0 ? "node" : "node-empty"
                 }
                 style={{
                   borderTop:
@@ -240,10 +226,12 @@ const BackAlgoPage = () => {
                     maxLength="1"
                     pattern="[1-9]"
                     onChange={(e) => {
-                      const inputValue = e.target.value;
-                      const numberValue = inputValue.replace(/[^1-9]/g, "");
-                      e.target.value = numberValue;
-                      solveSudoku(e, rowIndex, colIndex);
+                      if (isGameReady) {
+                        const inputValue = e.target.value;
+                        const numberValue = inputValue.replace(/[^1-9]/g, "");
+                        e.target.value = numberValue;
+                        solveSudoku(e, rowIndex, colIndex);
+                      }
                     }}
                   />
                 )}
