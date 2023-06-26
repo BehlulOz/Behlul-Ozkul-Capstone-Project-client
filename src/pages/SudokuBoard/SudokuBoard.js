@@ -3,12 +3,13 @@ import "./SudokuBoard.scss";
 import sudokuArray from "../../data/sudoku-boards.json";
 import solutionArray from "../../data/sudoku-solution.json";
 import Buttons from "../../components/Buttons/Buttons";
+import { Navigate } from "react-router-dom";
 
 export const SudokuBoard = () => {
   let [s, setS] = useState(0);
   let grid = JSON.parse(JSON.stringify(sudokuArray[s]));
   let solutionGrid = JSON.parse(JSON.stringify(solutionArray[s]));
-  const [newGrid, setNewGrid] = useState([...grid]);
+  const [newGrid, setNewGrid] = useState(grid);
   const [isGameReady, setIsGameReady] = useState(false);
   const rowCheck = useRef(true);
   const colCheck = useRef(true);
@@ -23,22 +24,11 @@ export const SudokuBoard = () => {
     checkComplete();
   }, [newGrid]);
 
-  // useEffect ((newInput, rowIndex, colIndex) => {
-  
-  //   if (newInput === NaN) {
-  //     newGrid[colIndex][rowIndex] = 0;
-  //     console.log("zero:", newInput);
-  //     console.log("grid:", newGrid);
-  //   }
-  // },[newGrid])
-
   const changeHandler = (e, rowIndex, colIndex) => {
     const newInput = parseInt(e.target.value);
     rowCheck.current = true;
     colCheck.current = true;
     innerGridCheck.current = true;
-    console.log("e:", e);
- 
 
     for (let i = 0; i < 9; i++) {
       if (newInput === newGrid[i][rowIndex]) {
@@ -51,7 +41,7 @@ export const SudokuBoard = () => {
       }
     }
     checkInnerGrid(rowIndex, colIndex, newInput);
-   
+
     if (
       0 < newInput &&
       newInput <= 9 &&
@@ -72,7 +62,6 @@ export const SudokuBoard = () => {
       }, 1000);
       console.log("false:", newInput);
     }
-    
     setNewGrid([...newGrid]);
   };
 
@@ -96,15 +85,16 @@ export const SudokuBoard = () => {
   };
 
   const sudokuReset = () => {
+    if (sudokuArray[s] === solutionArray[s]) {
+      window.location.reload();
+    }
     const inputNodes = document.querySelectorAll(".node-input");
     inputNodes.forEach((node) => {
       node.value = "";
-      if (sudokuArray[s] === solutionArray[s]) {
-        sudokuArray[s] = [...grid];
-      }
       setNewGrid([...grid]);
       setIsGameReady(false);
     });
+    console.log("grid:", grid);
   };
 
   const checkComplete = () => {
@@ -115,14 +105,16 @@ export const SudokuBoard = () => {
         }
       }
     }
+    alert ("You Completed the SUDOKU, Congratulations!");
     return (completeCheck.current = true);
   };
 
   const sudokuSolver = () => {
     sudokuArray[s] = solutionArray[s];
+    console.log("grid:", grid);
     setNewGrid(solutionGrid);
+    console.log("newGrid:", newGrid);
     setIsGameReady(false);
-    checkComplete();
   };
 
   const newSudoku = () => {
@@ -142,52 +134,71 @@ export const SudokuBoard = () => {
 
   return (
     <div className="sudoku-game-page">
-      <div className="board" key={JSON.stringify(sudokuArray[s])}>
-        {sudokuArray[s].map((col, colIndex) => (
+      <div className="board" key={JSON.stringify(grid)}>
+        {grid.map((col, colIndex) => (
           <div key={colIndex} className="col">
             {col.map((node, rowIndex) => (
-                <div
-                  key={rowIndex}
-                  className={
-                    sudokuArray[s][colIndex][rowIndex] > 0
-                      ? "node"
-                      : "node-empty"
-                  }
-                  style={{
-                    borderTop: rowIndex % 3 === 0 ? "2.5px solid #205375" : "1px solid #205375",
-                    borderLeft: colIndex % 3 === 0 ? "2.5px solid #205375" : "1px solid #205375",
-                    borderRight: (colIndex + 1) % 3 === 0 ? "2.5px solid #205375" : "1px solid #205375",
-                    borderBottom: (rowIndex + 1) % 3 === 0 ? "2.5px solid #205375" : "1px solid #205375"
-                  }}
-                >
-                  
-                  {node > 0 ? (
-                    node
-                  ) : (
-                    <input
-                      className="node-input"
-                      style={{
-                        borderTop: rowIndex % 3 === 0 ? "2.5px solid #205375" : "1px solid #205375",
-                        borderLeft: colIndex % 3 === 0 ? "2.5px solid #205375" : "1px solid #205375",
-                        borderRight: (colIndex + 1) % 3 === 0 ? "2.5px solid #205375" : "1px solid #205375",
-                        borderBottom: (rowIndex + 1) % 3 === 0 ? "2.5px solid #205375" : "1px solid #205375"
-                      }}
-                      type="text"
-                      inputMode="numeric"
-                      maxLength="1"
-                      pattern="[1-9]"
-                      onChange={(e) => {
-                        if (isGameReady) {
-                          const inputValue = e.target.value;
-                          const numberValue = inputValue.replace(/[^1-9]/g, "");
-                          e.target.value = numberValue;
-                          changeHandler(e, rowIndex, colIndex);
-                        }
-                      }}
-                      disabled={!isGameReady}
-                    />
-                  )}
-                </div>
+              <div
+                key={rowIndex}
+                className={solutionArray[s][colIndex][rowIndex] > 0 ? "node" : "node-empty"}
+                style={{
+                  borderTop:
+                    rowIndex % 3 === 0
+                      ? "2.5px solid #205375"
+                      : "1px solid #205375",
+                  borderLeft:
+                    colIndex % 3 === 0
+                      ? "2.5px solid #205375"
+                      : "1px solid #205375",
+                  borderRight:
+                    (colIndex + 1) % 3 === 0
+                      ? "2.5px solid #205375"
+                      : "1px solid #205375",
+                  borderBottom:
+                    (rowIndex + 1) % 3 === 0
+                      ? "2.5px solid #205375"
+                      : "1px solid #205375",
+                }}
+              >
+                {node > 0 ? (
+                  node
+                ) : (
+                  <input
+                    className="node-input"
+                    style={{
+                      borderTop:
+                        rowIndex % 3 === 0
+                          ? "2.5px solid #205375"
+                          : "1px solid #205375",
+                      borderLeft:
+                        colIndex % 3 === 0
+                          ? "2.5px solid #205375"
+                          : "1px solid #205375",
+                      borderRight:
+                        (colIndex + 1) % 3 === 0
+                          ? "2.5px solid #205375"
+                          : "1px solid #205375",
+                      borderBottom:
+                        (rowIndex + 1) % 3 === 0
+                          ? "2.5px solid #205375"
+                          : "1px solid #205375",
+                    }}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength="1"
+                    pattern="[1-9]"
+                    onChange={(e) => {
+                      if (isGameReady) {
+                        const inputValue = e.target.value;
+                        const numberValue = inputValue.replace(/[^1-9]/g, "");
+                        e.target.value = numberValue;
+                        changeHandler(e, rowIndex, colIndex);
+                      }
+                    }}
+                    disabled={!isGameReady}
+                  />
+                )}
+              </div>
             ))}
           </div>
         ))}
@@ -202,4 +213,3 @@ export const SudokuBoard = () => {
     </div>
   );
 };
-

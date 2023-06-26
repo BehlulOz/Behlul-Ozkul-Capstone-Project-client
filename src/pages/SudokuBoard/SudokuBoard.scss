@@ -1,3 +1,6 @@
+a {
+  text-decoration: none;
+}
 .board {
   display: flex;
   justify-content: center;
@@ -65,8 +68,6 @@
 
 .input-correct {
   animation: blink-green 2s linear forwards;
-  height: 3rem;
-  width: 3rem;
 }
 
 @keyframes blink-green {

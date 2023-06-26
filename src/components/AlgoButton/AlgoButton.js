@@ -2,17 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./AlgoButton.scss";
 
-const AlgoButton = ({ solveSudoku, newSudoku, sudokuReset }) => {
+const AlgoButton = ({ solveSudoku, newSudoku }) => {
+  
   const handleSolve = () => {
     solveSudoku(0, 0);
   };
 
   const handleNewSudoku = () => {
     newSudoku();
-  };
-
-  const handleReset = () => {
-    sudokuReset();
   };
 
   return (
@@ -23,11 +20,8 @@ const AlgoButton = ({ solveSudoku, newSudoku, sudokuReset }) => {
       <button className="button button__sudoku">
         <Link to="/">Play Sudoku !</Link>
       </button>
-      <button className="button button__new-sudoku" onClick={handleNewSudoku}>
+      <button className="button button__new-sudoku__algo" onClick={handleNewSudoku}>
         New Sudoku
-      </button>
-      <button className="button button__reset" onClick={handleReset}>
-        Reset
       </button>
     </div>
   );

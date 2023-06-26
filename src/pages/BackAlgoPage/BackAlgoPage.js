@@ -2,25 +2,23 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 import "./BackAlgoPage.scss";
 import algoArray from "../../data/sudoku-boards.json";
-import solutionArray from "../../data/sudoku-solution.json";
+import algoSolutionArray from "../../data/sudoku-solution.json";
 import AlgoButton from "../../components/AlgoButton/AlgoButton";
 
 const BackAlgoPage = () => {
   let [s, setS] = useState(0);
-  let grid = JSON.parse(JSON.stringify(algoArray[s]));
-  let solutionGrid = JSON.parse(JSON.stringify(solutionArray[s]));
-  const [newGrid, setNewGrid] = useState([...grid]);
-  const [isGameReady, setIsGameReady] = useState(false);
+  let algoGrid = JSON.parse(JSON.stringify(algoArray[s]));
+  let AlgoSolutionGrid = JSON.parse(JSON.stringify(algoSolutionArray[s]));
+  const [newGrid, setNewGrid] = useState(algoGrid);
   const rowCheck = useRef(true);
   const colCheck = useRef(true);
   const innerGridCheck = useRef(true);
 
   useEffect(() => {
-    setNewGrid([...grid]);
+    setNewGrid([...algoGrid]);
   }, [s]);
 
-  const solveSudoku = (colIndex, rowIndex, e) => {
-    setIsGameReady(true);
+  const solveSudoku = async (colIndex, rowIndex) => {
     if (colIndex === 9) {
       // Move to the next rowIndex if the end of the current rowIndex is reached
       rowIndex++;
@@ -35,60 +33,40 @@ const BackAlgoPage = () => {
 
     // Skip already filled cells
     if (newGrid[colIndex][rowIndex] > 0) {
-      return solveSudoku(rowIndex, colIndex + 1);
+      return solveSudoku(colIndex + 1, rowIndex);
     }
 
-    // Try different values for the empty cell
     for (let num = 1; num <= 9; num++) {
-      if (isValidMove(rowIndex, colIndex, num)) {
-        // Assign the valid value to the cell
-        newGrid[colIndex][rowIndex] = num;
-
-        // Recursive call to solve the puzzle
+      if (isValidNumber(colIndex, rowIndex, num)) {
+        const updatedGrid = [...newGrid]; // Create a copy of the newGrid state
+        updatedGrid[colIndex][rowIndex] = num;
+        setNewGrid(updatedGrid);
+        const cell = document.querySelector(`.col-${colIndex}-row-${rowIndex}`);
+        cell?.classList.add("node--correct");
+        console.log("cell:",cell);
         if (solveSudoku(colIndex + 1, rowIndex)) {
           return true;
         }
 
-        // If the current value doesn't lead to a solution, backtrack
-        newGrid[colIndex][rowIndex] = 0;
-      }
-    }
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // No valid value found, backtrack to the previous cell
+        setTimeout(() => {
+          cell?.classList.remove("node--correct");
+        }, 200);
+
+        updatedGrid[colIndex][rowIndex] = 0;
+        setNewGrid(updatedGrid);
+      }
+      const cell = document.querySelector(`.col-${colIndex}-row-${rowIndex}`);
+      cell?.classList.add("node--error");
+      setTimeout(() => {
+        cell?.classList.remove("node--error");
+      }, 200);
+    }
     return false;
   };
 
-  // const isValidMove = (row, col, num) => {
-
-  //   // Check if the value already exists in the same row
-  //   for (let i = 0; i < 9; i++) {
-  //     if (newGrid[i][row] === num) {
-  //       return false;
-  //     }
-  //   }
-
-  //   //Check if the value already exists in the same column
-  //   for (let i = 0; i < 9; i++) {
-  //     if (newGrid[col][i] === num) {
-  //       return false;
-  //     }
-  //   }
-
-  //   //Check if the value already exists in the 3x3 sub-grid
-  //   const subGridStartRow = Math.floor(row % 3) * 3;
-  //   const subGridStartCol = Math.floor(col % 3) * 3;
-  //   for (let i = 0; i < 3; i++) {
-  //     for (let j = 0; j < 3; j++) {
-  //       if (newGrid[subGridStartCol + i][subGridStartRow + j] === num) {
-  //         return false;
-  //       }
-  //     }
-  //   }
-
-  //   return true;
-  // };
-
-  const isValidMove = (colIndex, rowIndex, num) => {
+  const isValidNumber = (colIndex, rowIndex, num) => {
     rowCheck.current = true;
     colCheck.current = true;
     innerGridCheck.current = true;
@@ -137,17 +115,6 @@ const BackAlgoPage = () => {
     }
   };
 
-  const sudokuReset = () => {
-    const inputNodes = document.querySelectorAll(".node-input");
-    inputNodes.forEach((node) => {
-      node.value = "";
-      setNewGrid([...grid]);
-    });
-    if (algoArray[s] === solutionGrid) {
-      algoArray[s] = grid;
-    }
-  };
-
   const newSudoku = () => {
     if (s > 3) {
       s = 0;
@@ -157,27 +124,24 @@ const BackAlgoPage = () => {
     }
   };
 
-  // const checkComplete = () => {
-  //   for (let i = 0; i < 9; i++) {
-  //     for (let j = 0; j < 9; j++) {
-  //       if (newGrid[i][j] !== solutionGrid[i][j]) {
-  //         return (completeCheck.current = false);
-  //       }
-  //     }
-  //   }
-  //   return (completeCheck.current = true);
-  //   };
+  const handleChange = (e, rowIndex, colIndex) => {
+    const inputValue = e.target.value;
+    const parsedValue = parseInt(inputValue, 10) || 0;
+    const updatedGrid = [...newGrid];
+    updatedGrid[colIndex][rowIndex] = parsedValue;
+    setNewGrid(updatedGrid);
+  }
 
   return (
     <div className="back-algo-page">
-      <div className="back-algo-page__board" key={JSON.stringify(algoArray[s])}>
-        {algoArray[s].map((col, colIndex) => (
+      <div className="back-algo-page__board" key={JSON.stringify(newGrid)}>
+        {newGrid.map((col, colIndex) => (
           <div key={colIndex} className="col">
-            {col.map((node, rowIndex) => (
+            {col?.map((node, rowIndex) => (
               <div
                 key={rowIndex}
                 className={
-                  algoArray[s][colIndex][rowIndex] > 0 ? "node" : "node-empty"
+                  newGrid[colIndex][rowIndex] > 0 ? "node" : "node--empty"
                 }
                 style={{
                   borderTop:
@@ -198,11 +162,9 @@ const BackAlgoPage = () => {
                       : "1px solid #205375",
                 }}
               >
-                {node > 0 ? (
-                  node
-                ) : (
+                {node > 0 ? node :(
                   <input
-                    className="node-input"
+                    className="node--input"
                     style={{
                       borderTop:
                         rowIndex % 3 === 0
@@ -221,17 +183,13 @@ const BackAlgoPage = () => {
                           ? "2.5px solid #205375"
                           : "1px solid #205375",
                     }}
-                    type="text"
+                    type="number"
                     inputMode="numeric"
                     maxLength="1"
                     pattern="[1-9]"
+                    value={newGrid[colIndex][rowIndex]===0?"":newGrid[colIndex][rowIndex]}
                     onChange={(e) => {
-                      if (isGameReady) {
-                        const inputValue = e.target.value;
-                        const numberValue = inputValue.replace(/[^1-9]/g, "");
-                        e.target.value = numberValue;
-                        solveSudoku(e, rowIndex, colIndex);
-                      }
+                      handleChange(e, rowIndex, colIndex);
                     }}
                   />
                 )}
@@ -239,11 +197,7 @@ const BackAlgoPage = () => {
             ))}
           </div>
         ))}
-        <AlgoButton
-          solveSudoku={solveSudoku}
-          sudokuReset={sudokuReset}
-          newSudoku={newSudoku}
-        />
+        <AlgoButton solveSudoku={solveSudoku} newSudoku={newSudoku} />
       </div>
     </div>
   );

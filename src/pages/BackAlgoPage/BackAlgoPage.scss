@@ -1,3 +1,6 @@
+a {
+  text-decoration: none;
+}
 .back-algo-page {
   display: flex;
   flex-direction: column;
@@ -16,7 +19,7 @@
     display: flex;
     justify-content: center;
     margin: 3rem;
-    width: 40vw;
+    width: 45vw;
     height: 40vh;
     background-color: #2EB086;
   }  
@@ -31,7 +34,7 @@
   height: 1rem;
   width: 1rem;
   padding: 1rem;
-  &-empty {
+  &--empty {
     margin: 0;
     display: flex;
     align-items: center;
@@ -42,7 +45,7 @@
     padding: 1rem;
     border: none;
   }
-  &-input {
+  &--input {
     display: flex;
     border: none;
     justify-content: center;
@@ -64,7 +67,7 @@
   }
 }
 
-.input-error {
+.node--error {
   animation: blink-red 2s linear forwards;
   text-decoration: underline red;
 }
@@ -86,9 +89,9 @@
   
 }
 
-.input-correct {
+.node--correct {
   animation: blink-green 2s linear forwards;
-  color: #F45050;
+  color: #17594A;
 }
 
 @keyframes blink-green {
