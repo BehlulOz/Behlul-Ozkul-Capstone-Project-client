@@ -1,4 +1,8 @@
 @use "./styles/partials/fonts" as *;
+html {
+  font-family: "WorkSans";
+}
+
 a {
   text-decoration: none;
 }
@@ -8,8 +12,15 @@ a {
   justify-content: flex-start;
   align-items: center;
   height: 150vh;
-  padding-top: 2%;
   background-color: #1A5F7A;
+  &-header {
+    display: flex;
+    justify-content: end;
+    align-items: flex-start;
+    width: 100vw;
+    height: 8rem;
+    position: fixed;
+  }
 }
 
 

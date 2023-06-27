@@ -10,16 +10,17 @@ a {
   font-weight: bold;
   font-size: 3rem;
   width: 60vw;
-  max-width: 60rem;
+  max-width: 50rem;
   height: 60vh;
   background-color: #2EB086;
   border-radius: 1rem;
-  margin-top: 5rem;
+  margin-top: 11rem;
   &__board {
     display: flex;
     justify-content: center;
     margin: 3rem;
-    width: 45vw;
+    width: 42vw;
+    max-width: 40rem;
     height: 40vh;
     background-color: #2EB086;
   }  

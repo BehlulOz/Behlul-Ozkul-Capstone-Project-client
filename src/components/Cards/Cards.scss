@@ -1,0 +1,51 @@
+
+.presentation__sudoku {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #176B87;
+  border-radius: 2rem;
+  padding: 2rem;
+  &__image {
+    width: 20%;
+    height: auto;
+    border: .2rem solid #CBB279;
+    border-radius: 2rem;
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: scale(1.04);
+      border: .2rem solid #F45050;
+      cursor: pointer;
+    }
+  }
+  &__button {
+    display: flex;
+    justify-content: center;
+    height: 3.5rem;
+    align-items: center;
+    background-color: #A1B57D;
+    color: #F45050;
+    border: .2rem solid #CBB279;
+    border-radius: 2rem;
+    margin: 1rem 0;
+    width: 20%;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.03);
+      border: .2rem solid #F45050;
+    }
+    &--link {
+      color: #19282F;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #F9D949;
+      
+      &:hover {
+        cursor: pointer;
+      }
+      // &:hover {
+      //   color: #F45050;
+      // }
+    }
+  }
+}

@@ -41,27 +41,27 @@ const BackAlgoPage = () => {
         const updatedGrid = [...newGrid]; // Create a copy of the newGrid state
         updatedGrid[colIndex][rowIndex] = num;
         setNewGrid(updatedGrid);
-        const cell = document.querySelector(`.col-${colIndex}-row-${rowIndex}`);
-        cell?.classList.add("node--correct");
-        console.log("cell:",cell);
-        if (solveSudoku(colIndex + 1, rowIndex)) {
+        // const cell = document.querySelector(`.col-${colIndex}-row-${rowIndex}`);
+        // cell?.classList.add("node--correct");
+        // console.log("cell:",cell);
+        if (await solveSudoku(colIndex+ 1, rowIndex )) {
           return true;
         }
 
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 200));
 
-        setTimeout(() => {
-          cell?.classList.remove("node--correct");
-        }, 200);
+        // setTimeout(() => {
+        //   cell?.classList.remove("node--correct");
+        // }, 200);
 
         updatedGrid[colIndex][rowIndex] = 0;
         setNewGrid(updatedGrid);
       }
-      const cell = document.querySelector(`.col-${colIndex}-row-${rowIndex}`);
-      cell?.classList.add("node--error");
-      setTimeout(() => {
-        cell?.classList.remove("node--error");
-      }, 200);
+      // const cell = document.querySelector(`.col-${colIndex}-row-${rowIndex}`);
+      // cell?.classList.add("node--error");
+      // setTimeout(() => {
+      //   cell?.classList.remove("node--error");
+      // }, 200);
     }
     return false;
   };

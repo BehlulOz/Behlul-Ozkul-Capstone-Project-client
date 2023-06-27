@@ -17,11 +17,11 @@ const AlgoButton = ({ solveSudoku, newSudoku }) => {
       <button className="button button__algo" onClick={handleSolve}>
         Solve with Backtracking Algorithm
       </button>
-      <button className="button button__sudoku">
-        <Link to="/">Play Sudoku !</Link>
-      </button>
       <button className="button button__new-sudoku__algo" onClick={handleNewSudoku}>
         New Sudoku
+      </button>
+      <button className="button button__sudoku">
+        <Link className="button__sudoku--link" to="/">Play Sudoku !</Link>
       </button>
     </div>
   );

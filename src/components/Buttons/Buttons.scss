@@ -1,3 +1,10 @@
+a {
+  text-decoration: none;
+  color: #A1B57D;
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 .buttons {
   height: 10rem;
@@ -55,9 +62,8 @@
     }
   }
   &__back-algo {
-    background-color: #497174;
+    background-color: #B04759;
     color: #EB6440;
-    
     &:hover {
       background-color: #F45050;
       color: #F9D949;

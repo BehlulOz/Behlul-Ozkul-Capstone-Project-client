@@ -4,7 +4,6 @@
   justify-content: center;
   width: 20rem;
   height: 10rem;
-  margin: 1rem;
 }
 
 .button {
@@ -24,8 +23,9 @@
     color: #F45050;
     width: 17rem;
     height: 4rem;
+    margin: 0;
     &:hover {
-      background-color: #F45050;
+      background-color: #497174;
       color: #F9D949;
     }
   }
@@ -33,15 +33,29 @@
     background-color: #F9D949;
     color: #F45050;
     width: 17rem;
+    margin-top: 17rem;
+    &--link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 2rem;
+      width: 15rem;
+      color: #2EB086;
+      &:hover {
+        background-color: #F45050;
+        color: #F9D949;
+      }
+    }
     &:hover {
       background-color: #F45050;
-      color: #0A4D68;
+      color: #F9D949;
     }
   }
   &__new-sudoku__algo {
     background-color: #F45050;
     color: #F9D949;
     width: 17rem;
+    margin-top: 1rem;
     &:hover {
       background-color: #F9D949;
       color: #0A4D68;

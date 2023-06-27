@@ -4,6 +4,7 @@ import "./App.scss";
 import { SudokuBoard } from "./pages/SudokuBoard/SudokuBoard";
 import Header from "./components/Header/Header";
 import BackAlgoPage from "./pages/BackAlgoPage/BackAlgoPage";
+import PresentationPage from "./pages/PresentationPage/PresentationPage";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SudokuBoard />} />
           <Route path="/BackAlgo" element={<BackAlgoPage />} />
+          <Route path="/presentation" element={<PresentationPage />} />
         </Routes>
       </div>
     </BrowserRouter>
