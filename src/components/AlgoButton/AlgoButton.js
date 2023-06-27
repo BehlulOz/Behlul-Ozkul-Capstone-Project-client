@@ -12,6 +12,10 @@ const AlgoButton = ({ solveSudoku, newSudoku }) => {
     newSudoku();
   };
 
+  const handleStop = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="algo-button-container">
       <button className="button button__algo" onClick={handleSolve}>
@@ -20,8 +24,8 @@ const AlgoButton = ({ solveSudoku, newSudoku }) => {
       <button className="button button__new-sudoku__algo" onClick={handleNewSudoku}>
         New Sudoku
       </button>
-      <button className="button button__sudoku">
-        <Link className="button__sudoku--link" to="/">Play Sudoku !</Link>
+      <button className="button button__sudoku" onClick={handleStop}>
+        Stop !
       </button>
     </div>
   );

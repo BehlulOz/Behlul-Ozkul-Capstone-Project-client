@@ -2,6 +2,58 @@
   cursor: pointer;
 }
 
+.active {
+  &--s {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #F2FFE9;
+    border: none;
+    border-radius: 2rem;
+    background-color: #1A5F7A;
+    margin: 1rem 1rem 0 0;
+    padding: .5rem 1rem;
+    width: 12rem;
+    height: 2rem;
+    background-color: #2EB086;
+    border: 1px solid #F2FFE9;
+  }
+  &--b {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #F2FFE9;
+    border: none;
+    border-radius: 2rem;
+    background-color: #1A5F7A;
+    margin: 1rem 1rem 0 0;
+    padding: .5rem 1rem;
+    width: 12rem;
+    height: 2rem;
+    background-color: #2EB086;
+    border: 1px solid #F2FFE9;
+  }
+  &--p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #F2FFE9;
+    border: none;
+    border-radius: 2rem;
+    background-color: #1A5F7A;
+    margin: 1rem 1rem 0 0;
+    padding: .5rem 1rem;
+    width: 12rem;
+    height: 2rem;
+    background-color: #2EB086;
+    border: 1px solid #F2FFE9;
+  }
+ 
+}
+
 .title {
   display: flex;
   flex-wrap: wrap;
@@ -26,21 +78,69 @@ span {
   width: 52rem;
 }
 
-.button__presentation {
+.button__ps {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
   color: #F2FFE9;
-  border: 1px solid #F2FFE9;
+  border: none;
+  border-radius: 2rem;
+  border: 1px solid #2EB086;
+  background-color: #1A5F7A;
+  margin: 1rem 1rem 0 0;
+  padding: .5rem 1rem;
+  width: 12rem;
+  height: 2rem;
+  &:hover {
+    color: #F2FFE9;
+    background-color: #2EB086;
+    cursor: pointer;
+    border: 1px solid #F2FFE9;
+  }
+}  
+
+.button__sg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #F2FFE9;
+  border: none;
+  border-radius: 2rem;
+  border: 1px solid #2EB086;
+  background-color: #1A5F7A;
+  margin: 1rem 1rem 0 0;
+  padding: .5rem 1rem;
+  width: 12rem;
+  height: 2rem;
+  &:hover {
+    color: #F2FFE9;
+    background-color: #2EB086;
+    cursor: pointer;
+    border: 1px solid #F2FFE9;
+  }
+}
+
+.button__ba {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #F2FFE9;
+  border: none;
   border-radius: 2rem;
   background-color: #1A5F7A;
   margin: 1rem 1rem 0 0;
   padding: .5rem 1rem;
+  border: 1px solid #F2FFE9;
+  width: 12rem;
+  height: 2rem;
   &:hover {
-  color: #F2FFE9;
-  background-color: #2EB086;
-  cursor: pointer;
-  transform: scale(1.05);
-  }
+    color: #F2FFE9;
+    background-color: #2EB086;
+    cursor: pointer; 
+    border: 1px solid #F2FFE9;
+  }  
+ 
 }
