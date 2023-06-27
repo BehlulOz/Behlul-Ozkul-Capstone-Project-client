@@ -4,7 +4,7 @@ import "./PresentationPage.scss";
 const PresentationPage = () => {
   return (
     <>
-      <h1 className='presentation__title'>Capstone Project - SUDOKU & Backtracking Algorithm</h1>
+      <h1 className='presentation__title'>Capstone Project - SUDOKU Game & Backtracking Algorithm</h1>
       <div className='presentation'>
         <Cards />
       </div>

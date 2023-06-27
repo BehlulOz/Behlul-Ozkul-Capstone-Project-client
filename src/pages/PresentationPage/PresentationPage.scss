@@ -1,17 +1,17 @@
 .presentation {
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
   width:70vw;
-
   color: #F9D949;
   padding: 3rem;
   border-radius: 3rem;
-
   &__title {
     display: flex;
     justify-content: center;
     padding: 1rem;
-    background-color: #19282F;
+    background-color: #B46060;
     color: #F9D949;
     font-size: 1rem;
     border-radius: 2rem;
@@ -20,4 +20,3 @@
   }
 
 }
-//
