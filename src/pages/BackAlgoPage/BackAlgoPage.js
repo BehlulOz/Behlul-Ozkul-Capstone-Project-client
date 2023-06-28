@@ -4,6 +4,7 @@ import "./BackAlgoPage.scss";
 import algoArray from "../../data/sudoku-boards.json";
 import algoSolutionArray from "../../data/sudoku-solution.json";
 import AlgoButton from "../../components/AlgoButton/AlgoButton";
+import algoScheme from "../../assets/images/backtrack-scheme.PNG";
 
 const BackAlgoPage = () => {
   let [s, setS] = useState(0);
@@ -135,6 +136,7 @@ const BackAlgoPage = () => {
   return (
     <div className="back-algo-page">
       <div className="back-algo-page__board" key={JSON.stringify(newGrid)}>
+      <AlgoButton solveSudoku={solveSudoku} newSudoku={newSudoku} />
         {newGrid.map((col, colIndex) => (
           <div key={colIndex} className="col">
             {col?.map((node, rowIndex) => (
@@ -197,7 +199,7 @@ const BackAlgoPage = () => {
             ))}
           </div>
         ))}
-        <AlgoButton solveSudoku={solveSudoku} newSudoku={newSudoku} />
+      <img src={algoScheme} className="algo-scheme"/>
       </div>
     </div>
   );

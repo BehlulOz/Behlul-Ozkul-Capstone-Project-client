@@ -1,0 +1,62 @@
+@use "../../styles/partials/fonts" as *;
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:60rem;
+  height: 50rem;
+  color: #F9D949;
+  padding: 3rem;
+  border-radius: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  &__card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    width: 60rem;
+    height: 50rem;
+    &__image {
+      height: 70%;
+      width: 40%;
+      border: .2rem solid #CBB279;
+      border-radius: 2rem;
+      transition: transform 0.3s ease;
+      margin: 1rem;
+      &:hover {
+        transform: scale(1.04);
+        border: .2rem solid #F45050;
+        cursor: pointer;
+      }
+    }
+    &__button {
+      display: flex;
+      justify-content: center;
+      height: 4rem;
+      align-items: center;
+      color:aliceblue;
+      background-color: #B46060;
+      border: .2rem solid #CBB279;
+      border-radius: 2rem;
+      margin: 1rem;
+      width: 20rem;
+      font-size: 2rem;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.03);
+        border: .2rem solid #B46060;
+        color: #F9D949;
+      }
+    }
+  }
+}
+
+.thank-you {
+  font-size: 3rem;
+  width: 50rem;
+  height: 6rem;
+}

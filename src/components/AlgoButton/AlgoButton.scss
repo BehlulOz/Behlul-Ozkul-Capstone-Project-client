@@ -1,17 +1,17 @@
 .algo-button-container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  width: 20rem;
-  height: 10rem;
+  align-items: center;
+  width: 60rem;
+  height: 5rem;
 }
 
 .button {
   font-family: "WorkSans";
   font-size: 1.2rem;
   font-weight: bold;
-  padding: .5rem 1rem;
   margin: .5rem;
+  margin-left: 2rem;
   border:none;
   border-radius: 3rem;
   height: 3rem;
@@ -21,9 +21,7 @@
   &__algo {
     background-color: #0A4D68;
     color: #F45050;
-    width: 17rem;
-    height: 4rem;
-    margin: 0;
+    width: 25rem;
     &:hover {
       background-color: #497174;
       color: #F9D949;
@@ -32,14 +30,12 @@
   &__sudoku {
     background-color: #F9D949;
     color: #F45050;
-    width: 17rem;
-    margin-top: 17rem;
+    width: 10rem;
     &--link {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 2rem;
-      width: 15rem;
+      width: 10rem;
       color: #2EB086;
       &:hover {
         background-color: #F45050;
@@ -54,8 +50,7 @@
   &__new-sudoku__algo {
     background-color: #F45050;
     color: #F9D949;
-    width: 17rem;
-    margin-top: 1rem;
+    width: 10rem;
     &:hover {
       background-color: #F9D949;
       color: #0A4D68;
@@ -63,3 +58,9 @@
   }
 }
 
+.algo-scheme {
+  width: 28rem;
+  height: 28rem;
+  border-radius: 3rem;
+  margin: 0 1rem;
+}

@@ -7,12 +7,14 @@ const Header = () => {
   const [sActive, setSActive] = useState(false);
   const [bActive, setBActive] = useState(false);
   const [pActive, setPActive] = useState(false);
+  const [proActive, setProActive] = useState(false);
 
   const presentationHandler = () => {
     navigate('/presentation');
     setPActive(true);
     setSActive(false);
     setBActive(false);
+    setProActive(false);
   };
 
   const mainPageHandler = () => {
@@ -20,6 +22,7 @@ const Header = () => {
     setSActive(true);
     setPActive(false);
     setBActive(false);
+    setProActive(false);
   };
   
   const backtrackPageHandler = () => {
@@ -27,8 +30,18 @@ const Header = () => {
     setBActive(true);
     setSActive(false);
     setPActive(false);
+    setProActive(false);
   };
 
+  const profileHandler = () => {
+    navigate('/profile');
+    setProActive(true);
+    setBActive(false);
+    setSActive(false);
+    setPActive(false);
+
+  };
+  
 
 
   return (
@@ -44,6 +57,7 @@ const Header = () => {
       <button onClick={mainPageHandler} className={sActive?"active--s":"button__sg"}>Play Sudoku</button>
       <button onClick={backtrackPageHandler} className={bActive?"active--b":"button__ba"}>Learn Backtracking</button>
       <button onClick={presentationHandler} className={pActive?"active--p":"button__ps"}>Go to Presentation</button>
+      <button onClick={profileHandler} className={proActive?"active--pro":"button__pro"}>About Me</button>
     </div>
   </>
   );

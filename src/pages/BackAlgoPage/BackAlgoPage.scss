@@ -3,26 +3,24 @@ a {
 }
 .back-algo-page {
   display: flex;
-  flex-direction: column;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  align-items: center;
   font-family: "WorkSans";
   font-weight: bold;
   font-size: 3rem;
-  width: 60vw;
-  max-width: 50rem;
+  width: 60rem;
   height: 60vh;
   background-color: #2EB086;
   border: solid 1px #F45050;
   border-radius: 1rem;
-  margin-top: 11rem;
+  margin-top: 8rem;
+  padding: 2rem;
   &__board {
     display: flex;
-    justify-content: center;
-    margin: 3rem;
-    width: 42vw;
-    max-width: 40rem;
-    height: 40vh;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 60rem;
+    height: 35rem;
     background-color: #2EB086;
   }  
 }

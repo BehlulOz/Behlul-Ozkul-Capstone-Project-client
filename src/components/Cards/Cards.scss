@@ -4,7 +4,6 @@
   flex-direction: column;
   justify-content: center;
   border-radius: 2rem;
-  
   width: 20rem;
   height: auto;
   &__image {
@@ -49,9 +48,6 @@
         cursor: pointer;
         color: #F9D949;
       }
-      // &:hover {
-      //   color: #F45050;
-      // }
     }
   }
 }
@@ -81,7 +77,7 @@
   &__image {
     width: 30%;
     height: 22%;
-    margin-bottom: .9rem;
+    margin-bottom: 1rem;
     border: .2rem solid #CBB279;
     border-radius: 2rem;
     transition: transform 0.3s ease;
