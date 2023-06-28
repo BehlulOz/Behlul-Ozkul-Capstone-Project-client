@@ -13,7 +13,7 @@ import mysqlIcon from "../../assets/images/mysql-icon-9.jpg";
 import rapidIcon from "../../assets/images/rapidapi-icon.svg";
 import "./Cards.scss";
 
-const Cards = () => {
+const Cards = ({nameHandler}) => {
 
   const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ const Cards = () => {
           <img onClick={myPageHandler} src={npmIcon} className='presentation__my-page__image'/>  
           <img onClick={myPageHandler} src={mysqlIcon} className='presentation__my-page__image'/>  
           <img onClick={myPageHandler} src={rapidIcon} className='presentation__my-page__image'/> 
-        <button className='presentation__sudoku__button'>
+        <button onClick={nameHandler} className='presentation__sudoku__button'>
           <Link className='presentation__sudoku__button--link' to="/presentation"> 
             Feyzullah Behlul OZKUL
           </Link>

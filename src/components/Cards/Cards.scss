@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   border-radius: 2rem;
-  padding: 2rem;
+  
   width: 20rem;
   height: auto;
   &__image {
@@ -58,7 +58,7 @@
 
 .presentation__back-algo {
   width: 20rem;
-  height: auto;
+  height: 21rem;
   &__image {
     height: 100%;
     width: 97%;
@@ -77,10 +77,11 @@
   display: flex;
   flex-wrap: wrap;
   width: 20rem;
-  height: 30rem;
+  height: 26rem;
   &__image {
     width: 30%;
-    height: 20%;
+    height: 22%;
+    margin-bottom: .9rem;
     border: .2rem solid #CBB279;
     border-radius: 2rem;
     transition: transform 0.3s ease;
